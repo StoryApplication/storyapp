@@ -8,10 +8,9 @@
     android:background="#A9F6FF">
 
     <ImageView
+
         android:id="@+id/sun"
-
         android:layout_width="251dp"
-
         android:layout_height="219dp"
         android:layout_marginStart="831dp"
         android:layout_marginBottom="535dp"
