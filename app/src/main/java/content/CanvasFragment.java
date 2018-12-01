@@ -11,5 +11,4 @@ public class CanvasFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_draw, container, false);
     }
 
-
 }
