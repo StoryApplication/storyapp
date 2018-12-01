@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
         textViewButton1.setTypeface(typeface);
         textViewButton2.setTypeface(typeface);
 
-        textViewButton2.setOnClickListener(new View.OnClickListener() {
+        textViewButton1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {

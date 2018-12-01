@@ -26,8 +26,8 @@ public class DrawWriteActivity extends Activity {
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        fragmentTransaction.add(R.id.frags, mTextFragment).commit();
-        fragmentTransaction.add(R.id.frags, mDrawFragment).commit();
+        //fragmentTransaction.add(R.id.frags, mTextFragment).commit();
+        //fragmentTransaction.add(R.id.frags, mDrawFragment).commit();
 
 
 
