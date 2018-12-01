@@ -1,4 +1,6 @@
 package content;
 
-public class TextFragment {
+import android.app.Activity;
+
+public class TextFragment extends Activity {
 }
