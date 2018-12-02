@@ -12,6 +12,7 @@ import android.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.view.View.OnClickListener;
 
 
 public class DrawWriteActivity extends Activity {
@@ -25,6 +26,8 @@ public class DrawWriteActivity extends Activity {
     Button red;
     Button orange;
     Button gray;
+    Button prevButton, nextButton, previewButton, finishButton;
+    int currentPageNumber;
     @SuppressLint("WrongViewCast")
 //    DrawCanvas draw = findViewById(R.id.draw_frame);
 
@@ -49,6 +52,10 @@ public class DrawWriteActivity extends Activity {
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
+        // prevButton = (Button) findViewById(R.id.____);
+        // nextButton = (Button) findViewById(R.id.____);
+        // previewButton = (Button) findViewById(R.id.____);
+        // finishButton = (Button) findViewById(R.id.____);
 
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +107,39 @@ public class DrawWriteActivity extends Activity {
 
             }
         });
+        prevButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Entered prevButton OnClickListener");
+                if (currentPageNumber > 0) {
+                    // ___
+                }
+                else {
+                    // ___
+                }
+            }
+        });
 
+        nextButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Entered nextButton OnClickListener");
+            }
+        });
+
+        previewButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Entered previewButton OnClickListener");
+            }
+        });
+
+        finishButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Entered finishButton OnClickListener");
+            }
+        });
 
         //fragmentTransaction.add(R.id.frags, mTextFragment).commit();
         //fragmentTransaction.add(R.id.frags, mDrawFragment).commit();
