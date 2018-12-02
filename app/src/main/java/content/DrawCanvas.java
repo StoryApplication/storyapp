@@ -92,4 +92,10 @@ public class DrawCanvas extends View {
         }
     }
 
+    public void clear() {
+        if (mCanvas != null) {
+            this.mCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+            invalidate();
+        }
+    }
 }

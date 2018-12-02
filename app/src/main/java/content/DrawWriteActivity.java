@@ -178,6 +178,9 @@ public class DrawWriteActivity extends Activity {
         List<__> ____ =  ____;
 
         currentPageNumber += change;
+
+
+        draw.clear();
          */
     }
 
