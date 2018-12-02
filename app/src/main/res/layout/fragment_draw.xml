@@ -27,7 +27,53 @@
             android:layout_gravity="top"></ImageView>
     </android.gesture.GestureOverlayView>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:layout_centerInParent="true">
 
+
+
+    <Button
+        android:id="@+id/next_page"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="35dp"
+
+        android:text="Next"
+        app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+        app:layout_constraintLeft_toRightOf="@+id/previous"
+
+
+        tools:layout_editor_absoluteX="269dp"
+        tools:layout_editor_absoluteY="234dp" />
+
+    <Button
+        android:id="@+id/previous"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="previous"
+        app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+
+        tools:layout_editor_absoluteX="384dp"
+        tools:layout_editor_absoluteY="234dp" />
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="35dp"
+
+            android:text="Finish"
+            app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="234dp" />
+
+    </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/activity_main"
         android:layout_width="0dp"
@@ -149,7 +195,7 @@
 
     </LinearLayout>
 
- 
+
 
 
 </android.support.constraint.ConstraintLayout>

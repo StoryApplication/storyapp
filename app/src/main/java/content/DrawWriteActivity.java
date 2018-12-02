@@ -57,10 +57,10 @@ public class DrawWriteActivity extends Activity {
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
         erase = (ImageButton)findViewById(R.id.erase_button);
-        // prevButton = (Button) findViewById(R.id.____);
-        // nextButton = (Button) findViewById(R.id.____);
-        // previewButton = (Button) findViewById(R.id.____);
-        // finishButton = (Button) findViewById(R.id.____);
+//         prevButton = (Button) findViewById(R.id.____);
+//         nextButton = (Button) findViewById(R.id.____);
+//         previewButton = (Button) findViewById(R.id.____);
+//         finishButton = (Button) findViewById(R.id.____);
 
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
