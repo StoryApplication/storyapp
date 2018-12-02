@@ -1,5 +1,7 @@
 package content;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.view.View.OnClickListener;
@@ -26,6 +29,7 @@ public class DrawWriteActivity extends Activity {
     Button red;
     Button orange;
     Button gray;
+    ImageButton paint, erase;
     Button prevButton, nextButton, previewButton, finishButton;
     int currentPageNumber;
     @SuppressLint("WrongViewCast")
@@ -52,6 +56,8 @@ public class DrawWriteActivity extends Activity {
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
+        // paint = (ImageButton)findViewById(R.id.paint_button);
+        erase = (ImageButton)findViewById(R.id.erase_button);
         // prevButton = (Button) findViewById(R.id.____);
         // nextButton = (Button) findViewById(R.id.____);
         // previewButton = (Button) findViewById(R.id.____);
@@ -107,12 +113,27 @@ public class DrawWriteActivity extends Activity {
 
             }
         });
+
+        paint.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // draw.setErase(false);
+            }
+        });
+
+        erase.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // draw.setErase(true);
+            }
+        });
+
         prevButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Entered prevButton OnClickListener");
                 if (currentPageNumber > 0) {
-                    // ___
+                    updatePage(-1);
                 }
                 else {
                     // ___
@@ -124,6 +145,17 @@ public class DrawWriteActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Entered nextButton OnClickListener");
+                /*
+                if (currentPageNumber < ____) {
+
+                    updatePage(1);
+                }
+                else {
+
+
+                    updatePage(1);
+                }
+                */
             }
         });
 
@@ -149,5 +181,12 @@ public class DrawWriteActivity extends Activity {
 
     }
 
+    public void updatePage(int change) {
+        /*
+        List<__> ____ =  ____;
+
+        currentPageNumber += change;
+         */
+    }
 
 }
