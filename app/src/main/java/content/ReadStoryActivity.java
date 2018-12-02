@@ -2,11 +2,13 @@ package content;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ReadStoryActivity extends Activity {
 
@@ -15,7 +17,8 @@ public class ReadStoryActivity extends Activity {
     private BearFragment mBearFragment;
     private TextFragment mTextFragment;
     private PictureFragment mPictureFragment;
-    private int currPage; // stores current # of page
+    private MediaPlayer mMediaPlayer;
+    private boolean audioFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,18 @@ public class ReadStoryActivity extends Activity {
         mBearFragment = (BearFragment) fragmentManager.findFragmentById(R.id.bear_frag);
         mTextFragment = (TextFragment) fragmentManager.findFragmentById(R.id.text_frag);
         mPictureFragment = (PictureFragment) fragmentManager.findFragmentById(R.id.pic_frag);
+        mMediaPlayer = new MediaPlayer();
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                audioFinished = true;
+            }
+        });
+        audioFinished = false;
 
-        readStory(this.getIntent().getStringExtra("title")); // this activity should be called with intent that has extra "title" with name of story
+
+
+        //readStory(this.getIntent().getStringExtra("title")); // this activity should be called with intent that has extra "title" with name of story
     }
-
-    // Display selected Twitter feed
 
     public void readStory(String title) {
 
@@ -54,9 +64,19 @@ public class ReadStoryActivity extends Activity {
             // mBearFragment.animateBear()
             mPictureFragment.updateImage(dir, i);
             mTextFragment.updateStory(dir, i);
-            mTextFragment.readStory();
+            try {
+                mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "audio.mp3");
+                mMediaPlayer.prepare();
+                mMediaPlayer.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            while (!audioFinished) {
+                //animate bear method
+                // wait for audio to finish before proceeding
+            }
+            audioFinished = false;
         }
-
     }
 
 }

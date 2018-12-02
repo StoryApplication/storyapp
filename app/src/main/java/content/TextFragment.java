@@ -41,6 +41,8 @@ public class TextFragment extends Fragment {
 
     void updateStory(File dir, int i) {
 
+        Log.i(TAG, "Entered updateStory(" + dir + ", " + i + ")");
+
         File file = new File(dir + File.separator + i + File.separator + "text.txt");
         StringBuilder text = new StringBuilder();
 
@@ -57,9 +59,5 @@ public class TextFragment extends Fragment {
             Log.i(TAG, "IOException");
         }
         mTextView.setText(text);
-    }
-
-    public void readStory() {
-
     }
 }
