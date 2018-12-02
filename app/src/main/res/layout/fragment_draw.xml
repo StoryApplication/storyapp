@@ -134,12 +134,12 @@
             android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@+id/orange" />
 
-        <ImageButton
-            android:id="@+id/erase_button"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:src="@drawable/eraser"
-             />
+        <!--<ImageButton-->
+            <!--android:id="@+id/erase_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:src="@drawable/eraser"-->
+             <!--/>-->
 
 
 

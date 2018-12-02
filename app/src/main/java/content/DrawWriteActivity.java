@@ -56,7 +56,7 @@ public class DrawWriteActivity extends Activity {
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
-        erase = (ImageButton)findViewById(R.id.erase_button);
+        //erase = (ImageButton)findViewById(R.id.erase_button);
         // prevButton = (Button) findViewById(R.id.____);
         // nextButton = (Button) findViewById(R.id.____);
         // previewButton = (Button) findViewById(R.id.____);
@@ -113,61 +113,57 @@ public class DrawWriteActivity extends Activity {
             }
         });
 
-        erase.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                // draw.setErase(true);
-            }
-        });
+//        erase.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                // draw.setErase(true);
+//            }
+//        });
 
-        prevButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"Entered prevButton OnClickListener");
-                if (currentPageNumber > 0) {
-                    updatePage(-1);
-                }
-                else {
-                    // ___
-                }
-            }
-        });
+//        prevButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG,"Entered prevButton OnClickListener");
+//                if (currentPageNumber > 0) {
+//                    updatePage(-1);
+//                }
+//                else {
+//                    // ___
+//                }
+//            }
+//        });
+//
+//        nextButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG,"Entered nextButton OnClickListener");
+//                /*
+//                if (currentPageNumber < ___.size - 1) {
+//
+//                    updatePage(1);
+//                }
+//                else {
+//
+//
+//                    updatePage(1);
+//                }
+//                */
+//            }
+//        });
 
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"Entered nextButton OnClickListener");
-                /*
-                if (currentPageNumber < ___.size - 1) {
-
-                    updatePage(1);
-                }
-                else {
-
-
-                    updatePage(1);
-                }
-                */
-            }
-        });
-
-        previewButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"Entered previewButton OnClickListener");
-            }
-        });
-
-        finishButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"Entered finishButton OnClickListener");
-            }
-        });
-
-        //fragmentTransaction.add(R.id.frags, mTextFragment).commit();
-        //fragmentTransaction.add(R.id.frags, mDrawFragment).commit();
-
+//        previewButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG,"Entered previewButton OnClickListener");
+//            }
+//        });
+//
+//        finishButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG,"Entered finishButton OnClickListener");
+//            }
+//        });
 
 
 
