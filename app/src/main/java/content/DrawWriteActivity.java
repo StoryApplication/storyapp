@@ -65,35 +65,35 @@ public class DrawWriteActivity extends Activity {
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // draw.color(Color.BLUE);
+                draw.color(Color.BLUE);
 
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  draw.color(Color.GREEN);
+                draw.color(Color.GREEN);
 
             }
         });
          black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  draw.color(Color.BLACK);
+                draw.color(Color.BLACK);
 
             }
         });
         purple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  draw.color(Color.MAGENTA);
+                draw.color(Color.MAGENTA);
 
             }
         });
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // draw.color(Color.RED);
+               draw.color(Color.RED);
 
             }
         });
@@ -101,7 +101,7 @@ public class DrawWriteActivity extends Activity {
             @Override
             public void onClick(View view) {
                 int orange = Color.rgb(255, 165, 0);
-               // draw.color(orange);
+                draw.color(orange);
 
             }
         });
@@ -116,7 +116,7 @@ public class DrawWriteActivity extends Activity {
         erase.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // draw.setErase(true);
+                 draw.setErase(true);
             }
         });
 
