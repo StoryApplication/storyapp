@@ -12,4 +12,13 @@ import android.widget.ImageView;
 
 public class BearFragment extends Fragment{
     // class for the bear fragment
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.bear_fragment, container, false);
+
+    }
+
 }

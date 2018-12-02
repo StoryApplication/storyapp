@@ -27,7 +27,6 @@ public class ReadStoryActivity extends Activity {
         Log.i(TAG, "created ReadStoryActivity");
 
         setContentView(R.layout.read_story_activity);
-        System.out.println(Environment.getExternalStorageDirectory().toString());
 
         FragmentManager fragmentManager = getFragmentManager();
 
@@ -42,8 +41,8 @@ public class ReadStoryActivity extends Activity {
         });
         audioFinished = false;
 
-
-
+        Log.i(TAG, "Directory: " + Environment.getExternalStorageDirectory().toString());
+        Log.i(TAG, "Title: " + getIntent().getStringExtra("title"));
         //readStory(this.getIntent().getStringExtra("title")); // this activity should be called with intent that has extra "title" with name of story
     }
 
