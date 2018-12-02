@@ -33,7 +33,7 @@ public class DrawWriteActivity extends Activity {
     Button prevButton, nextButton, previewButton, finishButton;
     int currentPageNumber;
     @SuppressLint("WrongViewCast")
-//    DrawCanvas draw = findViewById(R.id.draw_frame);
+    DrawCanvas draw;
 
 
 
@@ -48,7 +48,7 @@ public class DrawWriteActivity extends Activity {
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-
+        draw = (DrawCanvas)findViewById(R.id.draw_frame);
         blue = findViewById(R.id.blue);
         green = findViewById(R.id.green);
         black = findViewById(R.id.black);
