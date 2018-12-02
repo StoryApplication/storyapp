@@ -22,7 +22,7 @@ public class DrawingView extends View {
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
-            init();
+        init();
     }
 
     private void init() {
@@ -87,5 +87,9 @@ public class DrawingView extends View {
         else {
             drawPaint.setXfermode(null);
         }
+    }
+
+    public void setColor(int color) {
+        drawPaint.setColor(color);
     }
 }

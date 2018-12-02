@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">StoryApplication</string>
-    <string name="brush">Brush</string>
-    <string name="erase_drawing">Erase</string>
-    <string name="save_drawing">Save</string>
 </resources>
