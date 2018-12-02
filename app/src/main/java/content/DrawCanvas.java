@@ -86,7 +86,7 @@ public class DrawCanvas extends View {
         // Set erase true or false
         erase = isErase;
         if (erase) {
-            paint.setStrokeWidth(50);
+            paint.setStrokeWidth(40);
             paint.setColor(Color.WHITE);
         }
         else {
