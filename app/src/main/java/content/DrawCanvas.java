@@ -13,8 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 
 public class DrawCanvas extends View {
 
@@ -87,7 +85,7 @@ public class DrawCanvas extends View {
         // Set erase true or false
         erase = isErase;
         if (erase) {
-            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            paint.setColor(Color.WHITE);
         }
         else {
             paint.setXfermode(null);
