@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
 
-    <android.gesture.GestureOverlayView
+    <FrameLayout
         android:id="@+id/gestures_overlay"
         android:layout_width="500dp"
         android:layout_height="700dp"
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top"></content.DrawCanvas>
-    </android.gesture.GestureOverlayView>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"

@@ -10,7 +10,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="hello"
+            android:hint="Enter text and write your story!"
             android:textAlignment="center"
             android:textSize="50dp"
             />
