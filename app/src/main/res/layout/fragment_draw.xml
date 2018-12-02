@@ -6,11 +6,11 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@android:color/white">
+    android:background="@color/White">
 
 
     <FrameLayout
-        android:id="@+id/gestures_overlay"
+        android:id="@+id/frame_param"
         android:layout_width="500dp"
         android:layout_height="700dp"
 
@@ -45,7 +45,7 @@
         android:layout_marginRight="35dp"
 
         android:text="Next"
-        app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+        app:layout_constraintTop_toBottomOf="@+id/frame_param"
         app:layout_constraintLeft_toRightOf="@+id/previous"
 
 
@@ -60,7 +60,7 @@
         android:layout_marginRight="35dp"
 
         android:text="previous"
-        app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+        app:layout_constraintTop_toBottomOf="@+id/frame_param"
 
         tools:layout_editor_absoluteX="384dp"
         tools:layout_editor_absoluteY="234dp" />
@@ -72,7 +72,7 @@
             android:layout_marginRight="35dp"
 
             android:text="Finish"
-            app:layout_constraintTop_toBottomOf="@+id/gestures_overlay"
+            app:layout_constraintTop_toBottomOf="@+id/frame_param"
 
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="234dp" />

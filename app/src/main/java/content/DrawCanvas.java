@@ -37,6 +37,7 @@ public class DrawCanvas extends View {
         paint.setColor(Color.BLACK);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setDither(true);
         paint.setStrokeWidth(10);
     }
 
@@ -85,7 +86,7 @@ public class DrawCanvas extends View {
         // Set erase true or false
         erase = isErase;
         if (erase) {
-            paint.setStrokeWidth(20);
+            paint.setStrokeWidth(50);
             paint.setColor(Color.WHITE);
         }
         else {
