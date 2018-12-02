@@ -24,6 +24,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:src="@drawable/cloud"
         android:layout_width="1055dp"
         android:layout_height="323dp"
         android:layout_marginStart="113dp"
@@ -39,6 +40,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="385dp"
+        android:src="@drawable/cloud"
         android:layout_height="213dp"
         android:layout_marginStart="46dp"
         android:layout_marginTop="56dp"
@@ -53,6 +55,7 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="384dp"
+        android:src = "@drawable/cloud"
         android:layout_height="262dp"
         android:layout_marginStart="99dp"
         android:layout_marginTop="46dp"
@@ -121,6 +124,7 @@
 
     <ImageView
         android:id="@+id/imageView4"
+        android:src="@drawable/bear"
         android:layout_width="178dp"
         android:layout_height="169dp"
         android:layout_marginStart="262dp"
@@ -131,6 +135,6 @@
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bear" />
+        />
 
 </android.support.constraint.ConstraintLayout>

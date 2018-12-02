@@ -56,7 +56,7 @@ public class DrawWriteActivity extends Activity {
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
-        //erase = (ImageButton)findViewById(R.id.erase_button);
+        erase = (ImageButton)findViewById(R.id.erase_button);
         // prevButton = (Button) findViewById(R.id.____);
         // nextButton = (Button) findViewById(R.id.____);
         // previewButton = (Button) findViewById(R.id.____);
@@ -113,12 +113,12 @@ public class DrawWriteActivity extends Activity {
             }
         });
 
-//        erase.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                // draw.setErase(true);
-//            }
-//        });
+        erase.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // draw.setErase(true);
+            }
+        });
 
 //        prevButton.setOnClickListener(new View.OnClickListener(){
 //            @Override
