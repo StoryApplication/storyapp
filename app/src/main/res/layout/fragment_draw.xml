@@ -173,15 +173,16 @@
             app:layout_constraintTop_toBottomOf="@+id/red" />
 
         <Button
-            android:id="@+id/gray"
+            android:id="@+id/brown"
             android:layout_width="60dp"
             android:layout_height="70dp"
             android:layout_gravity="right"
             android:layout_margin="10dp"
             android:background="@drawable/oval_button"
-            android:backgroundTint="@android:color/darker_gray"
+            android:backgroundTint="@color/Brown"
             android:elevation="0dp"
-            android:text="gray"
+            android:text="Brown"
+            android:textColor="@color/White"
             android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@+id/orange" />
 
@@ -198,5 +199,5 @@
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@android:color/black"/>
+        android:background="@android:color/darker_gray"/>
 </android.support.constraint.ConstraintLayout>

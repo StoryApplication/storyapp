@@ -38,7 +38,7 @@ public class DrawCanvas extends View {
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
         paint.setDither(true);
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(20);
     }
 
     @Override
@@ -50,6 +50,7 @@ public class DrawCanvas extends View {
     }
 
     public void onDraw(Canvas canvas) {
+
         if(canvasBitmap != null){
             canvas.drawBitmap(this.canvasBitmap, 0, 0, this.paint);
         }
@@ -57,6 +58,7 @@ public class DrawCanvas extends View {
     }
 
     public boolean onTouchEvent(MotionEvent event) {
+
         float xPos = event.getX();
         float yPos = event.getY();
 
@@ -79,6 +81,8 @@ public class DrawCanvas extends View {
     }
 
     public void color(int color) {
+
+        paint.setStrokeWidth(20);
         paint.setColor(color);
     }
 
@@ -86,7 +90,7 @@ public class DrawCanvas extends View {
         // Set erase true or false
         erase = isErase;
         if (erase) {
-            paint.setStrokeWidth(40);
+            paint.setStrokeWidth(60);
             paint.setColor(Color.WHITE);
         }
         else {

@@ -31,7 +31,7 @@ public class DrawWriteActivity extends Activity {
     Button purple;
     Button red;
     Button orange;
-    Button gray;
+    Button brown;
     ImageButton erase;
     Button prevButton, nextButton, previewButton, finishButton;
     int currentPageNumber;
@@ -58,7 +58,7 @@ public class DrawWriteActivity extends Activity {
         purple = findViewById(R.id.purple);
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
-        gray = findViewById(R.id.gray);
+        brown = findViewById(R.id.brown);
         erase = (ImageButton)findViewById(R.id.erase_button);
 
 //         prevButton = (Button) findViewById(R.id.____);
@@ -108,10 +108,10 @@ public class DrawWriteActivity extends Activity {
 
             }
         });
-        gray.setOnClickListener(new View.OnClickListener() {
+        brown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //draw.color(getResources().getColor(R.color.)));
+                draw.color(getResources().getColor(R.color.Brown));
 
             }
         });
