@@ -33,7 +33,7 @@ public class DrawWriteActivity extends Activity {
     Button orange;
     Button brown;
     ImageButton erase;
-    Button prevButton, nextButton, previewButton, finishButton;
+    Button prevButton, nextButton, previewButton, clear, finishButton;
     int currentPageNumber;
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
@@ -60,11 +60,17 @@ public class DrawWriteActivity extends Activity {
         orange = findViewById(R.id.orange);
         brown = findViewById(R.id.brown);
         erase = (ImageButton)findViewById(R.id.erase_button);
+        clear = findViewById(R.id.clear);
 
 //         prevButton = (Button) findViewById(R.id.____);
 //         nextButton = (Button) findViewById(R.id.____);
         finishButton = (Button) findViewById(R.id.finish);
-
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                draw.clear();
+            }
+        });
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
