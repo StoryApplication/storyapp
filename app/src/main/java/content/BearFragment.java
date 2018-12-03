@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -37,6 +40,7 @@ public class BearFragment extends Fragment{
     private MediaPlayer mMediaPlayer;
     private TextFragment mTextFragment;
     private PictureFragment mPictureFragment;
+    private TextView currPage, maxPage;
     File dir;
     int i, max;
     boolean stopStory, tracker;
@@ -55,6 +59,8 @@ public class BearFragment extends Fragment{
         playBtn = (ImageButton) view.findViewById(R.id.play);
         prevBtn = (ImageButton) view.findViewById(R.id.prev);
         nextBtn = (ImageButton) view.findViewById(R.id.next);
+        currPage = (TextView) view.findViewById(R.id.current_page);
+        maxPage = (TextView) view.findViewById(R.id.max_page);
 
         mMediaPlayer = new MediaPlayer();
         stopStory = false;
@@ -68,6 +74,7 @@ public class BearFragment extends Fragment{
                     stopStory = false;
                 }
                 i = 0;
+                currPage.setText(String.valueOf(i + 1));
                 readStory();
             }
         });
@@ -82,6 +89,7 @@ public class BearFragment extends Fragment{
                     gifDrawable.stop();
                     stopStory = true;
                     tracker = false;
+                    currPage.setText(String.valueOf(i + 1));
                 }
             }
         });
@@ -106,6 +114,7 @@ public class BearFragment extends Fragment{
                 if (i > 0) i--;
                 mTextFragment.updateStory(dir, i);
                 mPictureFragment.updateImage(dir, i);
+                currPage.setText(String.valueOf(i + 1));
             }
         });
 
@@ -117,6 +126,7 @@ public class BearFragment extends Fragment{
                 if (i < max) i++;
                 mTextFragment.updateStory(dir, i);
                 mPictureFragment.updateImage(dir, i);
+                currPage.setText(String.valueOf(i + 1));
             }
         });
 
@@ -129,6 +139,7 @@ public class BearFragment extends Fragment{
         }
         mTextFragment.updateStory(dir, i);
         mPictureFragment.updateImage(dir, i);
+        currPage.setText(String.valueOf(i + 1));
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -174,6 +185,7 @@ public class BearFragment extends Fragment{
         dir = d;
         i = 0;
         max = dir.listFiles().length - 1;
+        maxPage.setText(String.valueOf(max + 1));
     }
     public void onDetach() {
         if (gifDrawable.isPlaying()) {

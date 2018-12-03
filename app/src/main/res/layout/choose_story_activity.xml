@@ -3,13 +3,25 @@
     android:id="@+id/frags"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:baselineAligned="false">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:layout_weight="1"
+        android:background="@drawable/sq3"
+        android:gravity="center"
+        android:text="Select your story from the list below!"
+        android:textColor="#0a1b3d"
+        android:textSize="50sp"
+        android:textStyle="bold|italic"
+        android:typeface="sans" />
 
     <fragment
         android:id="@+id/stories_frag"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="4"
         class="content.ChooseStoryFragment" />
 </LinearLayout>
