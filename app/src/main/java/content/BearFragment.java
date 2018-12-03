@@ -89,10 +89,7 @@ public class BearFragment extends Fragment{
                     gifDrawable.stop();
                     stopStory = true;
                     tracker = false;
-                    if (i != max)
-                        currPage.setText(String.valueOf(i + 1));
-                    else
-                        currPage.setText(String.valueOf(i));
+                    currPage.setText(String.valueOf(i + 1));
 
                 }
             }
@@ -174,6 +171,8 @@ public class BearFragment extends Fragment{
                             Log.i(TAG, "finished playing page " + i);
                             if (i++ < max)
                                 readStory();
+                            else
+                                gifDrawable.stop();
                         }
                     }, millSecond + 100);
                 } catch (IOException e) {
