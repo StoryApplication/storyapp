@@ -1,8 +1,8 @@
 package content;
 
 public class Pages<Left, Right> {
-    private final Left left;
-    private final Right right;
+    private Left left;
+    private  Right right;
 
     public Pages(Left left, Right right){
         this.left = left;
@@ -17,6 +17,11 @@ public class Pages<Left, Right> {
         return right;
     }
 
-    
+    public void setLeft(Left left) {
+        this.left = left;
+    }
 
+    public void setRight(Right right) {
+        this.right = right;
+    }
 }
