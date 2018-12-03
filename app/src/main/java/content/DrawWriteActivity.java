@@ -34,9 +34,7 @@ import android.widget.Toast;
 
 
 public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitListener {
-    // Hello there
     private static final String TAG = "DrawWriteActivity";
-    static int counter = 0;
     private TextFragment mTextFragment;
     private CanvasFragment mDrawFragment;
     Button blue;
@@ -47,8 +45,9 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
     Button orange;
     Button brown;
     ImageButton erase;
-    int times = 0;
-    int tempSize = 0;
+    EditText storyText;
+    String storyTextInput;
+    Bitmap drawing;
 
     Button prevButton, nextButton, clear, finishButton;
     int currentPageNumber = 0;
@@ -73,7 +72,7 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
                 .setTitle("Name your story")
                 .setView(input)
 
-                .setPositiveButton("Save Story!", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Save Title", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         newStory.setTitle(input.getText().toString());
                     }
@@ -180,24 +179,46 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text = (EditText)findViewById(R.id.page_text);
-                String storyText =  text.getText().toString();
-                Bitmap drawing = draw.getBitmap();
-
-                page = new Pages<>(storyText, drawing);
-                currentPageNumber++;
-
-                if (currentPageNumber < newStory.getPages().size() - 1) {
-                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
-                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
-                }
-                else {
+                if(newStory.getPages().size() == 0){
+                    storyText = (EditText)findViewById(R.id.page_text);
+                    storyTextInput =  storyText.getText().toString();
+                    drawing = draw.getBitmap();
+                    page = new Pages<>(storyTextInput, drawing);
                     newStory.addPage(page);
-                    text.setText("");
+                    storyText.setText("");
                     draw.clear();
+                    currentPageNumber++;
+
+
+                    writeToStorage();
+                }else{
+                    //page = new Pages<>(storyTextInput, drawing);
+
+//                    storyText = (EditText)findViewById(R.id.page_text);
+                    storyTextInput =  storyText.getText().toString();
+                    drawing = draw.getBitmap();
+
+                    page = new Pages<>(storyTextInput, drawing);
+                    currentPageNumber++;
+
+
+                    if (currentPageNumber < newStory.getPages().size() - 1) {
+                        storyText.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                        draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                    }
+                    else {
+                        newStory.addPage(page);
+                        storyText.setText("");
+                        draw.clear();
+                    }
+
+                    storyText = (EditText)findViewById(R.id.page_text);
+                    storyTextInput =  storyText.getText().toString();
+                    drawing = draw.getBitmap();
+
+                    writeToStorage();
                 }
 
-                writeToStorage();
 
             }
         });
@@ -206,21 +227,23 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
 
             @Override
             public void onClick(View v) {
-                EditText text1 = (EditText)findViewById(R.id.page_text);
-                String storyText1 =  text1.getText().toString();
-                Bitmap drawing = draw.getBitmap();
-                page = new Pages<>(storyText1, drawing);
+
+                page = new Pages<>(storyTextInput, drawing);
 
                 if (currentPageNumber > 0) {
-                    if(currentPageNumber == newStory.getPages().size() && times == 0) {
+
+                    if(currentPageNumber == newStory.getPages().size() ){//&& times == 0) {
                         newStory.addPage(page);
-                        times++;
-                        tempSize = newStory.getPages().size();
                     }
                     currentPageNumber--;
-                    text1.setText(newStory.getPages().get(currentPageNumber).getLeft());
+
+                    storyText.setText(newStory.getPages().get(currentPageNumber).getLeft());
                     draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                    drawing = draw.getBitmap();
                 }
+//                storyText = (EditText)findViewById(R.id.page_text);
+//                storyTextInput =  storyText.getText().toString();
+//                drawing = draw.getBitmap();
             }
         });
 

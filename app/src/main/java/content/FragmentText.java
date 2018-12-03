@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 public class FragmentText extends Fragment{
-    
+
     private static final String TAG = "436Project";
 
     private TextView mTextView;
