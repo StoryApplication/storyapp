@@ -100,7 +100,6 @@ Log.i(TAG, "checking TTS");
             // starts the choosestory activity
             startActivity(new Intent(getApplicationContext(), ChooseStoryActivity.class));
         }
-
     }
 
     public void onDestroy() {

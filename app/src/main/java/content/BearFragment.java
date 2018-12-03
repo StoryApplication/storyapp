@@ -39,7 +39,7 @@ public class BearFragment extends Fragment{
     private PictureFragment mPictureFragment;
     File dir;
     int i, max;
-    boolean stopStory;
+    boolean stopStory, tracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,12 +65,10 @@ public class BearFragment extends Fragment{
             public void onClick(View view) {
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
-                    i--;
                     stopStory = false;
                 }
-                else {
-                    i--;
-                }
+                i = 0;
+                readStory();
             }
         });
 
@@ -78,9 +76,12 @@ public class BearFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 if (gifDrawable.isPlaying()) {
+                    if (!tracker && i > 0) i--;
+                    Log.i(TAG, "stop page " + i + ", " + tracker);
                     mMediaPlayer.pause();
                     gifDrawable.stop();
                     stopStory = true;
+                    tracker = false;
                 }
             }
         });
@@ -88,9 +89,11 @@ public class BearFragment extends Fragment{
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "play page " + i);
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
                     stopStory = false;
+                    readStory();
                 }
             }
         });
@@ -98,18 +101,22 @@ public class BearFragment extends Fragment{
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (i > 0) {
-                    i-= 2;
-                }
+                stopBtn.performClick();
+                Log.i(TAG, "move from page " + (i) + " to " + (i-1));
+                if (i > 0) i--;
+                mTextFragment.updateStory(dir, i);
+                mPictureFragment.updateImage(dir, i);
             }
         });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (i < max) {
-                    i++;
-                }
+                stopBtn.performClick();
+                Log.i(TAG, "move from page " + (i+1) + " to " + i);
+                if (i < max) i++;
+                mTextFragment.updateStory(dir, i);
+                mPictureFragment.updateImage(dir, i);
             }
         });
 
@@ -127,6 +134,10 @@ public class BearFragment extends Fragment{
             @Override
             public void run() {
                 try {
+                    if (stopStory) {
+                        tracker = true;
+                        return;
+                    }
                     mMediaPlayer.reset();
                     Log.i(TAG, "started playing page " + i);
                     mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
@@ -141,6 +152,10 @@ public class BearFragment extends Fragment{
                     handl.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            if (stopStory) {
+                                tracker = true;
+                                return;
+                            }
                             Log.i(TAG, "finished playing page " + i);
                             if (i++ < max)
                                 readStory();

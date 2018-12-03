@@ -70,8 +70,6 @@ public class ChooseStoryFragment  extends ListFragment {
         Log.i(TAG, "Entered onActivityCreated()");
 
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-
     }
 
     @Override
@@ -80,6 +78,7 @@ public class ChooseStoryFragment  extends ListFragment {
         // Notify the hosting Activity that a selection has been made.
 
         mCallback.onItemSelected(TITLES[position]);
-
+        l.clearChoices();
+        l.requestLayout();
     }
 }
