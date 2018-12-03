@@ -98,7 +98,7 @@ Log.i(TAG, "checking TTS");
 
             // starts the readstory activity
             Intent launcher = new Intent(getApplicationContext(), ReadStoryActivity.class);
-            launcher.putExtra("title", "Ollie's Jar");
+            launcher.putExtra("title", "hello world");
             startActivity(launcher);
         }
 
