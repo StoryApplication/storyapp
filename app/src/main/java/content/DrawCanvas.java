@@ -104,4 +104,13 @@ public class DrawCanvas extends View {
             invalidate();
         }
     }
+
+    public void setBitmap(Bitmap bitmap) {
+        if (bitmap == null) {
+            return;
+        }
+        clear();
+        this.mCanvas.drawBitmap(bitmap,0,0, this.paint);
+        invalidate();
+    }
 }

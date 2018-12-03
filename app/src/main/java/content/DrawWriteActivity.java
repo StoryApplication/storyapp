@@ -179,8 +179,15 @@ public class DrawWriteActivity extends Activity {
                 newStory.addPage(page);
                 currentPageNumber++;
 
-                text.setText("");
-                draw.clear();
+
+                if (currentPageNumber <= newStory.getPages().size() - 1) {
+                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                }
+                else {
+                    text.setText("");
+                    draw.clear();
+                }
             }
         });
 
