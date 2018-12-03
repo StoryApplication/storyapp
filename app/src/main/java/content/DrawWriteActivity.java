@@ -170,6 +170,9 @@ public class DrawWriteActivity extends Activity {
 
                 page = new Pages<>(storyText, drawing);
                 newStory.addPage(page);
+
+                text.setText("");
+                draw.clear();
             }
         });
 
