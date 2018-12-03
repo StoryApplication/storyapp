@@ -143,6 +143,53 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
                 draw.setErase(true);
             }
         });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText text = (EditText)findViewById(R.id.page_text);
+                String storyText =  text.getText().toString();
+                Bitmap drawing = draw.getBitmap();
+
+                page = new Pages<>(storyText, drawing);
+                currentPageNumber++;
+
+                if (currentPageNumber < newStory.getPages().size() - 1) {
+                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                }
+                else if(currentPageNumber >= newStory.getPages().size()) {
+                    newStory.addPage(page);
+                    text.setText("");
+                    draw.clear();
+
+                }
+
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                EditText text1 = (EditText)findViewById(R.id.page_text);
+                String storyText1 =  text1.getText().toString();
+                Bitmap drawing = draw.getBitmap();
+                page = new Pages<>(storyText1, drawing);
+
+                if (currentPageNumber > 0) {
+                    if(currentPageNumber == newStory.getPages().size()){
+                        newStory.addPage(page);
+                    }
+
+                    currentPageNumber--;
+                    text1.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                }
+                else {
+                    // ___
+                }
+            }
+        });
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,103 +205,13 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
                                 newStory.setTitle(input.getText().toString());
                                 storyList.add(newStory);
 
-                                // now we need to add to firebase
-
-                                //AND NOW WE PASS INTENT TO GO TO LIST OF STORIES
-                                //Intent intent = new Intent(DrawWriteActivity.this, WHATEVERCLASS.class);
-                                //startActivity(intent);
-
+                                writeToStorage();
+                                finish(); // goes back to previous activity
                             }
                         });
 
-                // Create the AlertDialog object and return it
+                // Create the AlertDialog object
                 builder.create().show();
-            }
-        });
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // page = new Pages<>(findViewById(R.id.page_text).)
-                EditText text = (EditText) findViewById(R.id.page_text);
-                String storyText = text.getText().toString();
-                //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
-                FrameLayout canvas = findViewById(R.id.frame_param);
-                canvas.setDrawingCacheEnabled(true);
-                canvas.buildDrawingCache();
-                Bitmap drawing = canvas.getDrawingCache();
-
-                page = new Pages<>(storyText, drawing);
-                newStory.addPage(page);
-                currentPageNumber++;
-
-
-                if (currentPageNumber <= newStory.getPages().size() - 1) {
-                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
-                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
-                } else {
-                    text.setText("");
-                    draw.clear();
-                }
-            }
-        });
-
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // page = new Pages<>(findViewById(R.id.page_text).)
-                EditText text = (EditText) findViewById(R.id.page_text);
-                String storyText = text.getText().toString();
-                //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
-                FrameLayout canvas = findViewById(R.id.frame_param);
-                canvas.setDrawingCacheEnabled(true);
-                canvas.buildDrawingCache();
-                Bitmap drawing = canvas.getDrawingCache();
-
-                page = new Pages<>(storyText, drawing);
-                newStory.addPage(page);
-
-                if (currentPageNumber > 0) {
-                    currentPageNumber--;
-                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
-                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
-                } else {
-                    // _____
-                }
-            }
-        });
-//
-//        nextButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG,"Entered nextButton OnClickListener");
-//                /*
-//                if (currentPageNumber < ___.size - 1) {
-//
-//                    updatePage(1);
-//                }
-//                else {
-//
-//
-//                    updatePage(1);
-//                }
-//                */
-//            }
-//        });
-
-//        previewButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG,"Entered previewButton OnClickListener");
-//            }
-//        });
-
-        finishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Entered finishButton OnClickListener");
-                writeToStorage();
-                finish(); // goes back to previous activity
             }
         });
 

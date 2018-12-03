@@ -113,4 +113,14 @@ public class DrawCanvas extends View {
         this.mCanvas.drawBitmap(bitmap,0,0, this.paint);
         invalidate();
     }
+    public Bitmap getBitmap() {
+        if(mCanvas == null) {
+            return null;
+        }
+        this.setDrawingCacheEnabled(true);
+        this.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+        this.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
 }
