@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
+import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class BearFragment extends Fragment{
     private ImageButton playBtn;
     private ImageButton restartBtn;
     private ImageButton stopBtn;
+    private ImageButton prevBtn;
+    private ImageButton nextBtn;
     private GifDrawable gifDrawable;
 
 
@@ -50,6 +53,8 @@ public class BearFragment extends Fragment{
         restartBtn = (ImageButton) view.findViewById(R.id.restart);
         stopBtn = (ImageButton) view.findViewById(R.id.stop);
         playBtn = (ImageButton) view.findViewById(R.id.play);
+        prevBtn = (ImageButton) view.findViewById(R.id.prev);
+        nextBtn = (ImageButton) view.findViewById(R.id.next);
 
         mMediaPlayer = new MediaPlayer();
         stopStory = false;
@@ -85,6 +90,24 @@ public class BearFragment extends Fragment{
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
                     stopStory = false;
+                }
+            }
+        });
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (i > 0) {
+                    i-= 2;
+                }
+            }
+        });
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (i < max) {
+                    i++;
                 }
             }
         });
