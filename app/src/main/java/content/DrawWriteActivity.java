@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Bitmap;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.EditText;
 
 
 public class DrawWriteActivity extends Activity {
@@ -57,10 +60,10 @@ public class DrawWriteActivity extends Activity {
         orange = findViewById(R.id.orange);
         gray = findViewById(R.id.gray);
         erase = (ImageButton)findViewById(R.id.erase_button);
+
 //         prevButton = (Button) findViewById(R.id.____);
 //         nextButton = (Button) findViewById(R.id.____);
-//         previewButton = (Button) findViewById(R.id.____);
-//         finishButton = (Button) findViewById(R.id.____);
+        finishButton = (Button) findViewById(R.id.finish);
 
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +122,29 @@ public class DrawWriteActivity extends Activity {
                  draw.setErase(true);
             }
         });
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText input = new EditText(DrawWriteActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DrawWriteActivity.this);
+                builder.setMessage("")
+                        .setTitle("Name your story")
+                        .setView(input)
+
+                        .setPositiveButton("Yo", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CONFIRM
+                            }
+                        })
+                        .setNegativeButton("Bye", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CANCEL
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                 builder.create().show();
+            }
+        });
 
 //        prevButton.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -168,6 +194,7 @@ public class DrawWriteActivity extends Activity {
 
 
     }
+
 
     public void updatePage(int change) {
         /*
