@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 
 public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitListener {
+    // Hello there
     private static final String TAG = "DrawWriteActivity";
     static int counter = 0;
     private TextFragment mTextFragment;
