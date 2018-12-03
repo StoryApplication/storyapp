@@ -46,6 +46,9 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
     Button orange;
     Button brown;
     ImageButton erase;
+    int times = 0;
+    int tempSize = 0;
+
     Button prevButton, nextButton, clear, finishButton;
     int currentPageNumber = 0;
     @SuppressLint("WrongViewCast")
@@ -54,18 +57,40 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
     static ArrayList<Story> storyList = new ArrayList<Story>();
     int w = 10, h = 10;
 
-    Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+    Bitmap.Config conf = Bitmap.Config.ARGB_8888;
     Bitmap bmp = Bitmap.createBitmap(w, h, conf);
     Pages<String, Bitmap> page = new Pages<>("",bmp );
     String title;
 
+
     private TextToSpeech mTts; // JASON- needed to synthesize .wav file for text to speech
 
+    private void createPopup() {
+        final EditText input = new EditText(DrawWriteActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(DrawWriteActivity.this);
+        builder.setMessage("")
+                .setTitle("Name your story")
+                .setView(input)
 
+                .setPositiveButton("Save Story!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        newStory.setTitle(input.getText().toString());
+                    }
+
+                });
+
+        // Create the AlertDialog object
+        builder.create().show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_write);
+        createPopup();
+        if(newStory.getTitle().compareTo("") == 0) {
+            Toast.makeText(getApplicationContext(), "Please enter title", Toast.LENGTH_SHORT).show();
+            createPopup();
+        }
 
         mTextFragment = new TextFragment();
         mDrawFragment = new CanvasFragment();
@@ -86,6 +111,7 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
         prevButton = (Button) findViewById(R.id.previous);
         nextButton = (Button) findViewById(R.id.next_page);
         finishButton = (Button) findViewById(R.id.finish);
+
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,92 +179,61 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editText = (EditText)findViewById(R.id.page_text);
-                String text =  editText.getText().toString();
+                EditText text = (EditText)findViewById(R.id.page_text);
+                String storyText =  text.getText().toString();
                 Bitmap drawing = draw.getBitmap();
-                page = new Pages<>(text, drawing);
 
-
+                page = new Pages<>(storyText, drawing);
                 currentPageNumber++;
 
-
-                if (currentPageNumber  < newStory.getPages().size() - 1 ) {
-                    editText.setText(newStory.getPages().get(currentPageNumber ).getLeft());
-                    draw.setBitmap(newStory.getPages().get(currentPageNumber ).getRight());
-
+                if (currentPageNumber < newStory.getPages().size() - 1) {
+                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
                 }
-                else  {
-                    if (currentPageNumber  == newStory.getPages().size() - 1 ) {
-
-                        editText.setText(newStory.getPages().get(currentPageNumber).getLeft());
-                        draw.setBitmap(newStory.getPages().get(currentPageNumber ).getRight());
-
-                    }
-                    else {
-
-                        counter++;
-                        editText.setText("");
-                        draw.clear();
-
-                        newStory.addPage(page);
-                    }
-
-
+                else {
+                    newStory.addPage(page);
+                    text.setText("");
+                    draw.clear();
                 }
-
 
             }
         });
 
         prevButton.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-                EditText editText = (EditText)findViewById(R.id.page_text);
-                String text =  editText.getText().toString();
+                EditText text1 = (EditText)findViewById(R.id.page_text);
+                String storyText1 =  text1.getText().toString();
                 Bitmap drawing = draw.getBitmap();
-                page = new Pages<>(text, drawing);
+                page = new Pages<>(storyText1, drawing);
 
                 if (currentPageNumber > 0) {
-
-                    if(currentPageNumber -1  == newStory.getPages().size()  ){
-
+                    if(currentPageNumber == newStory.getPages().size() && times == 0) {
                         newStory.addPage(page);
-                        counter++;
+                        times++;
+                        tempSize = newStory.getPages().size();
                     }
-
                     currentPageNumber--;
-                    editText.setText(newStory.getPages().get(currentPageNumber ).getLeft());
-                    draw.setBitmap(newStory.getPages().get(currentPageNumber ).getRight());
-                }
-                else {
-
+                    text1.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
                 }
             }
         });
+
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText input = new EditText(DrawWriteActivity.this);
-                AlertDialog.Builder builder = new AlertDialog.Builder(DrawWriteActivity.this);
-                builder.setMessage("")
-                        .setTitle("Name your story")
-                        .setView(input)
 
-                        .setPositiveButton("Save Story!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-
-                                newStory.setTitle(input.getText().toString());
                                     storyList.add(newStory);
 
                                     writeToStorage();
                                     finish(); // goes back to previous activity
                                 }
-                        });
 
-                // Create the AlertDialog object
-                builder.create().show();
-            }
+
+
+
         });
 
         //JASON- initializes TTS engine
