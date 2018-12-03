@@ -269,7 +269,7 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
         String text = page.getLeft();
         Bitmap bm = (Bitmap) page.getRight();
 
-        File dir = new File(getExternalFilesDir("Stories") + File.separator + newStory.getTitle() + File.separator + (currentPageNumber - 1));
+        File dir = new File(getExternalFilesDir("Stories") + File.separator + newStory.getTitle() + File.separator + (currentPageNumber));
         dir.mkdirs();
 
         File tf = new File(dir, "text.txt");
@@ -283,7 +283,7 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
             stream.close();
 
             // create sound file
-            mTts.synthesizeToFile(text, null, sf, "page" + (currentPageNumber - 1));
+            mTts.synthesizeToFile(text, null, sf, "page" + (currentPageNumber));
 
             // create image file
             stream = new FileOutputStream(imgf);
