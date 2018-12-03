@@ -36,7 +36,7 @@ public class DrawWriteActivity extends Activity {
     Button brown;
     ImageButton erase;
     Button prevButton, nextButton, previewButton, clear, finishButton;
-    int currentPageNumber;
+    int currentPageNumber = 0;
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
     Story newStory = new Story();
@@ -170,6 +170,7 @@ public class DrawWriteActivity extends Activity {
 
                 page = new Pages<>(storyText, drawing);
                 newStory.addPage(page);
+                currentPageNumber++;
 
                 text.setText("");
                 draw.clear();
