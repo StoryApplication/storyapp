@@ -4,15 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    >
 
-    <TextView
+
+    <content.Font
+        android:id="@+id/select_title"
         android:layout_width="match_parent"
         android:layout_height="23dp"
         android:layout_weight="1"
         android:background="@drawable/sq3"
         android:gravity="center"
         android:text="Select your story from the list below!"
+        android:fontFamily="@a"
+
         android:textColor="#0a1b3d"
         android:textSize="50sp"
         android:textStyle="bold|italic"

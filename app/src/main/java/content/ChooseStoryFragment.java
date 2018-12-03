@@ -2,12 +2,17 @@ package content;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -15,6 +20,9 @@ public class ChooseStoryFragment  extends ListFragment {
 
     private static String[] TITLES;
     private static final String TAG = "436Project";
+
+
+
 
     public interface SelectionListener {
         public void onItemSelected(String title);
@@ -36,6 +44,9 @@ public class ChooseStoryFragment  extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
 
         // use different layout definition, depending on whether device is pre-
         // or post-honeycomb
