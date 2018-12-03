@@ -20,6 +20,9 @@
         <activity
             android:name=".ReadStoryActivity" >
         </activity>
+        <activity
+            android:name=".ChooseStoryActivity" >
+        </activity>
 
     </application>
 

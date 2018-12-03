@@ -78,6 +78,7 @@ public class BearFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 if (gifDrawable.isPlaying()) {
+                    mMediaPlayer.pause();
                     gifDrawable.stop();
                     stopStory = true;
                 }
@@ -116,6 +117,9 @@ public class BearFragment extends Fragment{
     }
 
     public void readStory() {
+        if (stopStory) {
+            return;
+        }
         mTextFragment.updateStory(dir, i);
         mPictureFragment.updateImage(dir, i);
         final Handler handler = new Handler();
@@ -123,9 +127,6 @@ public class BearFragment extends Fragment{
             @Override
             public void run() {
                 try {
-                    if (stopStory) {
-                        return;
-                    }
                     mMediaPlayer.reset();
                     Log.i(TAG, "started playing page " + i);
                     mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
@@ -158,5 +159,14 @@ public class BearFragment extends Fragment{
         dir = d;
         i = 0;
         max = dir.listFiles().length - 1;
+    }
+    public void onDetach() {
+        if (gifDrawable.isPlaying()) {
+            mMediaPlayer.pause();
+            gifDrawable.stop();
+            stopStory = true;
+        }
+        mMediaPlayer.release();
+        super.onDetach();
     }
 }

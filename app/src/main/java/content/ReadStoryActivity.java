@@ -41,10 +41,6 @@ public class ReadStoryActivity extends Activity {
         mMediaPlayer = new MediaPlayer();
 
         Log.i(TAG, "finished oncreate");
-        max = dir.listFiles().length - 1;
-        i = 0;
-        //readStory();
-
         mBearFragment.readStory();
     }
 

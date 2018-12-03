@@ -52,12 +52,12 @@ Log.i(TAG, "checking TTS");
     }
 
 
-    public void installOllie() {
+    public void installOllie(String title) {
         Log.i(TAG, "Creating Ollie's Jar Story");
         int[] pages = {R.string.page0, R.string.page1, R.string.page2, R.string.page3, R.string.page4, R.string.page5, R.string.page6};
         int[] pictures = {R.drawable.page0, R.drawable.page1, R.drawable.page2, R.drawable.page3, R.drawable.page4, R.drawable.page5, R.drawable.page6};
         for (int i = 0; i < 7; i++) {
-            File dir = new File(root + File.separator + "Ollie's Jar" + File.separator + i);
+            File dir = new File(root + File.separator + title + File.separator + i);
             dir.mkdirs();
             String text = getText(pages[i]).toString();
             File tf = new File(dir, "text.txt");;
@@ -93,13 +93,12 @@ Log.i(TAG, "checking TTS");
             mTts.setSpeechRate(.8f);
 
             if (root.listFiles().length == 0) { // if the directory is empty
-                installOllie();
+                installOllie("Ollie's Jar");
+                installOllie("Ollie's Jar 2");
             }
 
-            // starts the readstory activity
-            Intent launcher = new Intent(getApplicationContext(), ReadStoryActivity.class);
-            launcher.putExtra("title", "hello world");
-            startActivity(launcher);
+            // starts the choosestory activity
+            startActivity(new Intent(getApplicationContext(), ChooseStoryActivity.class));
         }
 
     }
