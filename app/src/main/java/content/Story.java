@@ -1,17 +1,19 @@
 package content;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class Story {
     String sTitle;
 
-    ArrayList<Pages<String, Integer>> sPages = new ArrayList<Pages<String, Integer>>();
+    ArrayList<Pages<String, Bitmap>> sPages = new ArrayList<Pages<String, Bitmap>>();
 
-    public Story(String title, List<Pages<String, Integer>> pages) {
+    public Story(String title, List<Pages<String, Bitmap>> pages) {
         sTitle = title;
         if (pages != null) {
-            sPages = new ArrayList<Pages<String, Integer>>(pages);
+            sPages = new ArrayList<Pages<String, Bitmap>>(pages);
         }
     }
 
@@ -35,12 +37,12 @@ public class Story {
         sTitle = title;
     }
 
-    public List<Pages<String, Integer>> getPages() {
+    public List<Pages<String, Bitmap>> getPages() {
         return sPages;
     }
 
-    public void setPages(List<Pages<String, Integer>> pages) {
-        sPages = new ArrayList<Pages<String, Integer>>(pages);
+    public void setPages(List<Pages<String, Bitmap>> pages) {
+        sPages = new ArrayList<Pages<String, Bitmap>>(pages);
     }
 
     public String toString() {
