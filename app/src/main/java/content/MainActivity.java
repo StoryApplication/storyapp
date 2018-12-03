@@ -92,7 +92,8 @@ Log.i(TAG, "checking TTS");
             mTts.setLanguage(Locale.US);
             mTts.setSpeechRate(.8f);
 
-            if (root.listFiles().length == 0) { // if the directory is empty
+            if (root.listFiles().length == 0)
+            { // if the directory is empty
                 installOllie("Ollie's Jar");
                 installOllie("Ollie's Jar 2");
             }
