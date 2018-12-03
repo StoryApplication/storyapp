@@ -36,7 +36,7 @@ public class BearFragment extends Fragment{
     private PictureFragment mPictureFragment;
     File dir;
     int i, max;
-    boolean stopStory;
+    boolean stopStory, tracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,32 +60,35 @@ public class BearFragment extends Fragment{
             public void onClick(View view) {
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
-                    i--;
                     stopStory = false;
                 }
-                else {
-                    i--;
-                }
+                i = 0;
+                readStory();
             }
         });
 
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "stop page " + i + ", " + tracker);
                 if (gifDrawable.isPlaying()) {
                     mMediaPlayer.pause();
                     gifDrawable.stop();
                     stopStory = true;
                 }
+                if (!tracker && i > 0) i--;
+                tracker = false;
             }
         });
 
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "play page " + i);
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
                     stopStory = false;
+                    readStory();
                 }
             }
         });
@@ -104,6 +107,10 @@ public class BearFragment extends Fragment{
             @Override
             public void run() {
                 try {
+                    if (stopStory) {
+                        tracker = true;
+                        return;
+                    }
                     mMediaPlayer.reset();
                     Log.i(TAG, "started playing page " + i);
                     mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
@@ -118,6 +125,10 @@ public class BearFragment extends Fragment{
                     handl.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            if (stopStory) {
+                                tracker = true;
+                                return;
+                            }
                             Log.i(TAG, "finished playing page " + i);
                             if (i++ < max)
                                 readStory();
