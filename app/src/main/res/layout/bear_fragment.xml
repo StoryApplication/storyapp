@@ -1,0 +1,119 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/talkingbear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingTop="30dp"
+            android:src="@drawable/talkingbear" />
+
+        <ImageButton
+            android:id="@+id/restart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/restart"
+            android:layout_below="@+id/talkingbear"
+            android:layout_toLeftOf="@+id/play"
+            android:paddingRight="50dp"
+            android:background="@color/background"/>
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/play"
+            android:layout_below="@+id/talkingbear"
+            android:layout_centerHorizontal="true"
+            android:background="@color/background"/>
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/stop"
+            android:layout_below="@+id/talkingbear"
+            android:layout_toRightOf="@id/play"
+            android:paddingLeft="50dp"
+            android:background="@color/background"/>
+
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prev"
+            android:layout_below="@+id/restart"
+            android:background="@color/background"
+            android:paddingTop="50dp"
+            android:paddingLeft="110dp"/>
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next"
+            android:layout_below="@+id/stop"
+            android:background="@color/background"
+            android:layout_toRightOf="@+id/prev"
+            android:paddingLeft="55dp"
+            android:paddingTop="50dp"/>
+
+        <TextView
+            android:id="@+id/page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Page "
+            android:layout_below="@+id/next"
+            android:textAlignment="center"
+            android:textColor="@color/fontColor"
+            android:textSize="25sp"
+            android:paddingTop="35dp"
+            android:paddingLeft="155dp"/>
+
+        <TextView
+            android:id="@+id/current_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_below="@+id/next"
+            android:paddingTop="35dp"
+            android:layout_toRightOf="@+id/page"
+            android:textAlignment="center"
+            android:textColor="@color/fontColor"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" of "
+            android:paddingTop="35dp"
+            android:layout_below="@+id/next"
+            android:layout_toRightOf="@+id/current_page"
+            android:textAlignment="center"
+            android:textColor="@color/fontColor"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/max_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:paddingTop="35dp"
+            android:layout_below="@+id/next"
+            android:layout_toRightOf="@+id/of"
+            android:textAlignment="center"
+            android:textColor="@color/fontColor"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+</ScrollView>
