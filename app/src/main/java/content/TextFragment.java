@@ -33,7 +33,6 @@ public class TextFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mTextView = getView().findViewById(R.id.text_view);
-        mTextView.setText(Environment.getExternalStorageDirectory().toString());
     }
 
 
@@ -42,6 +41,8 @@ public class TextFragment extends Fragment {
     void updateStory(File dir, int i) {
 
         Log.i(TAG, "Entered updateStory(" + dir + ", " + i + ")");
+
+        mTextView = getView().findViewById(R.id.text_view);
 
         File file = new File(dir + File.separator + i + File.separator + "text.txt");
         StringBuilder text = new StringBuilder();
@@ -59,5 +60,6 @@ public class TextFragment extends Fragment {
             Log.i(TAG, "IOException");
         }
         mTextView.setText(text);
+        Log.i(TAG, "Updated text " + i );
     }
 }
