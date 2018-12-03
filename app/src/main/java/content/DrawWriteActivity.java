@@ -1,19 +1,24 @@
 package content;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import android.app.FragmentManager;
@@ -27,7 +32,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class DrawWriteActivity extends Activity {
+public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitListener {
     private static final String TAG = "DrawWriteActivity";
     private TextFragment mTextFragment;
     private CanvasFragment mDrawFragment;
@@ -43,12 +48,12 @@ public class DrawWriteActivity extends Activity {
     int currentPageNumber = 0;
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
-    Story newStory = new Story();
+    Story newStory = new Story(); // JASON- assumed all new pages would be added to this variable
     static ArrayList<Story> storyList = new ArrayList<Story>();
-    Pages<String, Bitmap> page ;
+    Pages<String, Bitmap> page;
     String title;
 
-
+    private TextToSpeech mTts; // JASON- needed to synthesize .wav file for text to speech
 
 
     @Override
@@ -61,7 +66,7 @@ public class DrawWriteActivity extends Activity {
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        draw = (DrawCanvas)findViewById(R.id.draw_frame);
+        draw = (DrawCanvas) findViewById(R.id.draw_frame);
         blue = findViewById(R.id.blue);
         green = findViewById(R.id.green);
         black = findViewById(R.id.black);
@@ -69,11 +74,11 @@ public class DrawWriteActivity extends Activity {
         red = findViewById(R.id.red);
         orange = findViewById(R.id.orange);
         brown = findViewById(R.id.brown);
-        erase = (ImageButton)findViewById(R.id.erase_button);
+        erase = (ImageButton) findViewById(R.id.erase_button);
         clear = findViewById(R.id.clear);
 
-         prevButton = (Button) findViewById(R.id.previous);
-         nextButton = (Button) findViewById(R.id.next_page);
+        prevButton = (Button) findViewById(R.id.previous);
+        nextButton = (Button) findViewById(R.id.next_page);
         finishButton = (Button) findViewById(R.id.finish);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +100,7 @@ public class DrawWriteActivity extends Activity {
 
             }
         });
-         black.setOnClickListener(new View.OnClickListener() {
+        black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 draw.color(Color.BLACK);
@@ -112,7 +117,7 @@ public class DrawWriteActivity extends Activity {
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               draw.color(Color.RED);
+                draw.color(Color.RED);
 
             }
         });
@@ -132,10 +137,10 @@ public class DrawWriteActivity extends Activity {
             }
         });
 
-        erase.setOnClickListener(new View.OnClickListener(){
+        erase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 draw.setErase(true);
+                draw.setErase(true);
             }
         });
         finishButton.setOnClickListener(new View.OnClickListener() {
@@ -163,16 +168,16 @@ public class DrawWriteActivity extends Activity {
                         });
 
                 // Create the AlertDialog object and return it
-                 builder.create().show();
+                builder.create().show();
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // page = new Pages<>(findViewById(R.id.page_text).)
-                EditText text = (EditText)findViewById(R.id.page_text);
-                String storyText =  text.getText().toString();
+                // page = new Pages<>(findViewById(R.id.page_text).)
+                EditText text = (EditText) findViewById(R.id.page_text);
+                String storyText = text.getText().toString();
                 //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
                 FrameLayout canvas = findViewById(R.id.frame_param);
                 canvas.setDrawingCacheEnabled(true);
@@ -187,20 +192,19 @@ public class DrawWriteActivity extends Activity {
                 if (currentPageNumber <= newStory.getPages().size() - 1) {
                     text.setText(newStory.getPages().get(currentPageNumber).getLeft());
                     draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
-                }
-                else {
+                } else {
                     text.setText("");
                     draw.clear();
                 }
             }
         });
 
-        prevButton.setOnClickListener(new View.OnClickListener(){
+        prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // page = new Pages<>(findViewById(R.id.page_text).)
-                EditText text = (EditText)findViewById(R.id.page_text);
-                String storyText =  text.getText().toString();
+                EditText text = (EditText) findViewById(R.id.page_text);
+                String storyText = text.getText().toString();
                 //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
                 FrameLayout canvas = findViewById(R.id.frame_param);
                 canvas.setDrawingCacheEnabled(true);
@@ -214,8 +218,7 @@ public class DrawWriteActivity extends Activity {
                     currentPageNumber--;
                     text.setText(newStory.getPages().get(currentPageNumber).getLeft());
                     draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
-                }
-                else {
+                } else {
                     // _____
                 }
             }
@@ -245,16 +248,94 @@ public class DrawWriteActivity extends Activity {
 //                Log.i(TAG,"Entered previewButton OnClickListener");
 //            }
 //        });
-//
-//        finishButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG,"Entered finishButton OnClickListener");
-//            }
-//        });
 
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "Entered finishButton OnClickListener");
+                writeToStorage();
+                finish(); // goes back to previous activity
+            }
+        });
 
+        //JASON- initializes TTS engine
+        Log.i(TAG, "checking TTS");
+        Intent checkIntent = new Intent();
+        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkIntent, 12121);
 
     }
 
+    //JASON- will write newStory (contains all pages) to external storage once finished
+    public void writeToStorage() {
+        for (int i = 0; i < newStory.getPages().size(); i++) {
+            Pages currPage = newStory.getPages().get(i);
+            String text = (String) currPage.getLeft(); // can probably change Pages datatypes to String/Bitmap to avoid casting
+            Bitmap bm = (Bitmap) currPage.getRight();
+
+            File dir = new File(getExternalFilesDir("Stories") + File.separator + newStory.getTitle() + File.separator + i);
+            dir.mkdirs(); // creates directory for page
+
+            File tf = new File(dir, "text.txt");
+            File imgf = new File(dir, "image.png");
+            File sf = new File(dir, "sound.wav");
+
+            try {
+                // create text file
+                FileOutputStream stream = new FileOutputStream(tf);
+                stream.write(text.getBytes());
+                stream.close();
+
+                // create sound file
+                mTts.synthesizeToFile(text, null, sf, "page" + i);
+
+                // create image file
+                stream = new FileOutputStream(imgf);
+                bm.compress(Bitmap.CompressFormat.PNG, 80, stream);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    //JASON- sets settings for TTS engine, can modify this to change voice
+    @Override
+    public void onInit(int status) {
+        Log.i(TAG, "onInit");
+        if (status == TextToSpeech.SUCCESS) {
+            mTts.setLanguage(Locale.US);
+            mTts.setSpeechRate(.8f);
+        }
+
+    }
+
+    //JASON- installs TTS engine if does not exist
+    public void onActivityResult(
+            int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 12121) {
+            Log.i(TAG, "TTS received");
+            if (resultCode != TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                Log.i(TAG, "TTS fail");
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                        TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
+            mTts = new TextToSpeech(getApplicationContext(), this);
+        }
+    }
+
+    //JASON- shutsdown TTS engine
+    public void onDestroy() {
+        if (mTts != null)
+        {
+            mTts.stop();
+            mTts.shutdown();
+        }
+        super.onDestroy();
+    }
 }
