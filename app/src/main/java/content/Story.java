@@ -2,10 +2,11 @@ package content;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Story {
+public class Story implements Serializable {
     String sTitle;
 
     ArrayList<Pages<String, Bitmap>> sPages = new ArrayList<Pages<String, Bitmap>>();

@@ -1,5 +1,6 @@
 package content;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -147,7 +148,7 @@ public class DrawWriteActivity extends Activity {
                         .setPositiveButton("Read Your Story!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent intent = new Intent(DrawWriteActivity.this, AllLocalStories.class);
-                                intent.putExtra(input.getText().toString(), (Parcelable) newStory);
+                                intent.putExtra(input.getText().toString(), (Serializable) newStory);
 
                             }
                         })
