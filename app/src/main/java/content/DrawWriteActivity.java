@@ -1,6 +1,7 @@
 package content;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -43,6 +44,7 @@ public class DrawWriteActivity extends Activity {
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
     Story newStory = new Story();
+    static ArrayList<Story> storyList = new ArrayList<Story>();
     Pages<String, Bitmap> page ;
     String title;
 
@@ -145,19 +147,21 @@ public class DrawWriteActivity extends Activity {
                         .setTitle("Name your story")
                         .setView(input)
 
-                        .setPositiveButton("Read Your Story!", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Save Story!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent intent = new Intent(DrawWriteActivity.this, AllLocalStories.class);
-                                intent.putExtra(input.getText().toString(), (Serializable) newStory);
 
-                            }
-                        })
-                        .setNegativeButton("View Other Stories!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                              // bring back to read stories page
+                                newStory.setTitle(input.getText().toString());
+                                storyList.add(newStory);
+
+                                // now we need to add to firebase
+
+                                //AND NOW WE PASS INTENT TO GO TO LIST OF STORIES
+                                //Intent intent = new Intent(DrawWriteActivity.this, WHATEVERCLASS.class);
+                                //startActivity(intent);
 
                             }
                         });
+
                 // Create the AlertDialog object and return it
                  builder.create().show();
             }
