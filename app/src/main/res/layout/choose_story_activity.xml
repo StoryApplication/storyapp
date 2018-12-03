@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frags"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,17 +17,16 @@
         android:background="@drawable/sq3"
         android:gravity="center"
         android:text="Select your story from the list below!"
-        android:fontFamily="@a"
 
-        android:textColor="#0a1b3d"
         android:textSize="50sp"
-        android:textStyle="bold|italic"
-        android:typeface="sans" />
+
+        />
 
     <fragment
         android:id="@+id/stories_frag"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         android:layout_weight="4"
-        class="content.ChooseStoryFragment" />
+        class="content.ChooseStoryFragment"
+     />
 </LinearLayout>
