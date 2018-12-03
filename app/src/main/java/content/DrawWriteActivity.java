@@ -224,7 +224,35 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
     }
 
     //JASON- will write newStory (contains all pages) to external storage once finished
+    //Leo - write single page
     public void writeToStorage() {
+        String text = page.getLeft();
+        Bitmap bm = (Bitmap) page.getRight();
+
+        File dir = new File(getExternalFilesDir("Stories") + File.separator + newStory.getTitle() + File.separator + currentPageNumber);
+        dir.mkdirs();
+
+        File tf = new File(dir, "text.txt");
+        File imgf = new File(dir, "image.png");
+        File sf = new File(dir, "sound.wav");
+
+        try {
+            // create text file
+            FileOutputStream stream = new FileOutputStream(tf);
+            stream.write(text.getBytes());
+            stream.close();
+
+            // create sound file
+            mTts.synthesizeToFile(text, null, sf, "page" + currentPageNumber);
+
+            // create image file
+            stream = new FileOutputStream(imgf);
+            bm.compress(Bitmap.CompressFormat.PNG, 80, stream);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*
         for (int i = 0; i < newStory.getPages().size(); i++) {
             Pages currPage = newStory.getPages().get(i);
             String text = (String) currPage.getLeft(); // can probably change Pages datatypes to String/Bitmap to avoid casting
@@ -253,7 +281,7 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
 
