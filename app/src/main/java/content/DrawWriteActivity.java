@@ -6,10 +6,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import android.app.FragmentManager;
@@ -41,6 +43,7 @@ public class DrawWriteActivity extends Activity {
     DrawCanvas draw;
     Story newStory = new Story();
     Pages<String, Bitmap> page ;
+    String title;
 
 
 
@@ -66,8 +69,8 @@ public class DrawWriteActivity extends Activity {
         erase = (ImageButton)findViewById(R.id.erase_button);
         clear = findViewById(R.id.clear);
 
-//         prevButton = (Button) findViewById(R.id.____);
-//         nextButton = (Button) findViewById(R.id.____);
+         prevButton = (Button) findViewById(R.id.previous);
+         nextButton = (Button) findViewById(R.id.next_page);
         finishButton = (Button) findViewById(R.id.finish);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,20 +138,23 @@ public class DrawWriteActivity extends Activity {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText input = new EditText(DrawWriteActivity.this);
+                final EditText input = new EditText(DrawWriteActivity.this);
                 AlertDialog.Builder builder = new AlertDialog.Builder(DrawWriteActivity.this);
                 builder.setMessage("")
                         .setTitle("Name your story")
                         .setView(input)
 
-                        .setPositiveButton("Yo", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Read Your Story!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // CONFIRM
+                                Intent intent = new Intent(DrawWriteActivity.this, AllLocalStories.class);
+                                intent.putExtra(input.getText().toString(), (Parcelable) newStory);
+
                             }
                         })
-                        .setNegativeButton("Bye", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("View Other Stories!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // CANCEL
+                              // bring back to read stories page
+
                             }
                         });
                 // Create the AlertDialog object and return it
