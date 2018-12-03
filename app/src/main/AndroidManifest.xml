@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DrawWriteActivity"></activity>
+        <activity android:name=".ChooseStoryActivity"></activity>
+        <activity android:name=".ReadStoryActivity"></activity>
     </application>
 
 </manifest>
