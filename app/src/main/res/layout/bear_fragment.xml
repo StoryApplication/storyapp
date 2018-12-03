@@ -23,15 +23,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/restart"
             android:layout_below="@+id/talkingbear"
-            android:layout_toLeftOf="@+id/playpause"
+            android:layout_toLeftOf="@+id/play"
             android:paddingRight="50dp"
             android:background="@color/background"/>
 
         <ImageButton
-            android:id="@+id/playpause"
+            android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/playpause"
+            android:src="@drawable/play"
             android:layout_below="@+id/talkingbear"
             android:layout_centerHorizontal="true"
             android:background="@color/background"/>
@@ -42,9 +42,30 @@
             android:layout_height="wrap_content"
             android:src="@drawable/stop"
             android:layout_below="@+id/talkingbear"
-            android:layout_toRightOf="@id/playpause"
+            android:layout_toRightOf="@id/play"
             android:paddingLeft="50dp"
             android:background="@color/background"/>
+
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prev"
+            android:layout_below="@+id/restart"
+            android:background="@color/background"
+            android:paddingTop="50dp"
+            android:paddingLeft="110dp"/>
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next"
+            android:layout_below="@+id/stop"
+            android:background="@color/background"
+            android:layout_toRightOf="@+id/prev"
+            android:paddingLeft="55dp"
+            android:paddingTop="50dp"/>
 
     </RelativeLayout>
 </ScrollView>

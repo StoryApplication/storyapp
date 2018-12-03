@@ -17,18 +17,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 import java.io.File;
 import java.io.IOException;
 
 public class BearFragment extends Fragment{
     // class for the bear fragment
-    private ImageButton playpauseBtn;
+    private ImageButton playBtn;
     private ImageButton restartBtn;
     private ImageButton stopBtn;
     private GifDrawable gifDrawable;
 
-    private boolean bearTalking;
 
     private static final String TAG = "436Project";
     private MediaPlayer mMediaPlayer;
@@ -36,83 +36,73 @@ public class BearFragment extends Fragment{
     private PictureFragment mPictureFragment;
     File dir;
     int i, max;
+    boolean stopStory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.bear_fragment, container, false);
+        final GifImageView gifImageView = (GifImageView) view.findViewById(R.id.talkingbear);
 
+        gifDrawable = (GifDrawable) gifImageView.getDrawable();
 
-        playpauseBtn = (ImageButton) view.findViewById(R.id.playpause);
         restartBtn = (ImageButton) view.findViewById(R.id.restart);
         stopBtn = (ImageButton) view.findViewById(R.id.stop);
-        bearTalking = false;
+        playBtn = (ImageButton) view.findViewById(R.id.play);
+
         mMediaPlayer = new MediaPlayer();
+        stopStory = false;
 
-        return inflater.inflate(R.layout.bear_fragment, container, false);
-
-        playpauseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (bearTalking) {
-                    pauseBear();
-                }
-                else {
-                    playBear();
-                }
-            }
-        });
 
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (!gifDrawable.isPlaying()) {
+                    gifDrawable.start();
+                    i--;
+                    stopStory = false;
+                }
+                else {
+                    i--;
+                }
             }
         });
 
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (gifDrawable.isPlaying()) {
+                    gifDrawable.stop();
+                    stopStory = true;
+                }
+            }
+        });
 
+        playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!gifDrawable.isPlaying()) {
+                    gifDrawable.start();
+                    stopStory = false;
+                }
             }
         });
 
         return view;
     }
 
-    void playBear() {
-
-    }
-
-    void pauseBear() {
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
     public void readStory() {
         mTextFragment.updateStory(dir, i);
         mPictureFragment.updateImage(dir, i);
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
+                    if (stopStory) {
+                        return;
+                    }
                     mMediaPlayer.reset();
                     Log.i(TAG, "started playing page " + i);
                     mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");

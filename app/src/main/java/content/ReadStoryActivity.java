@@ -48,7 +48,7 @@ public class ReadStoryActivity extends Activity {
         mBearFragment.readStory();
     }
 
-    public void readStory() {
+    /*public void readStory() {
         mTextFragment.updateStory(dir, i);
         mPictureFragment.updateImage(dir, i);
         Handler handler = new Handler();
@@ -81,5 +81,5 @@ public class ReadStoryActivity extends Activity {
                 }
             }
         }, 1000);
-    }
+    }*/
 }
