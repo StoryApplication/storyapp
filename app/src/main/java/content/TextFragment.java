@@ -2,7 +2,6 @@ package content;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,7 @@ public class TextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.text_fragment, container, false);
+        return inflater.inflate(R.layout.text_frag, container, false);
 
     }
 
