@@ -41,9 +41,7 @@ public class ReadStoryActivity extends Activity {
         });
         audioFinished = false;
 
-        Log.i(TAG, "Directory: " + Environment.getExternalStorageDirectory().toString());
-        Log.i(TAG, "Title: " + getIntent().getStringExtra("title"));
-        //readStory(this.getIntent().getStringExtra("title")); // this activity should be called with intent that has extra "title" with name of story
+        //readStory(this.getIntent().getStringExtra("title"));
     }
 
     public void readStory(String title) {
@@ -64,7 +62,7 @@ public class ReadStoryActivity extends Activity {
             mPictureFragment.updateImage(dir, i);
             mTextFragment.updateStory(dir, i);
             try {
-                mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "audio.mp3");
+                mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
                 mMediaPlayer.prepare();
                 mMediaPlayer.start();
             } catch (IOException e) {
