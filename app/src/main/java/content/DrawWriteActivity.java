@@ -196,6 +196,8 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
                     draw.clear();
                 }
 
+                writeToStorage();
+
             }
         });
 
@@ -224,11 +226,28 @@ public class DrawWriteActivity extends Activity implements TextToSpeech.OnInitLi
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText text = (EditText)findViewById(R.id.page_text);
+                String storyText =  text.getText().toString();
+                Bitmap drawing = draw.getBitmap();
 
-                                    storyList.add(newStory);
+                page = new Pages<>(storyText, drawing);
+                currentPageNumber++;
 
-                                    writeToStorage();
-                                    finish(); // goes back to previous activity
+                if (currentPageNumber < newStory.getPages().size() - 1) {
+                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                }
+                else {
+                    newStory.addPage(page);
+                    text.setText("");
+                    draw.clear();
+                }
+
+                writeToStorage();
+
+                storyList.add(newStory);
+
+                finish(); // goes back to previous activity
                                 }
 
 
