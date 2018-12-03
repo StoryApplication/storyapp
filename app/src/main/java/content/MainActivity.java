@@ -32,7 +32,19 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this,
                         DrawWriteActivity.class);
 
+
                 startActivity(intent);
+            }
+        });
+        textViewButton2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+               // Intent intent = new Intent(MainActivity.this,
+              //          ChooseStoryActivity.class);
+
+
+             //   startActivity(intent);
             }
         });
     }
