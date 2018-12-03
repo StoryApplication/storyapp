@@ -2,9 +2,10 @@ package content;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.File;
@@ -18,14 +19,15 @@ public class ReadStoryActivity extends Activity {
     private TextFragment mTextFragment;
     private PictureFragment mPictureFragment;
     private MediaPlayer mMediaPlayer;
-    private boolean audioFinished;
+    int i, max;
+    File dir;
+    boolean isPrepared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.i(TAG, "created ReadStoryActivity");
-
         setContentView(R.layout.read_story_activity);
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -33,49 +35,51 @@ public class ReadStoryActivity extends Activity {
         mBearFragment = (BearFragment) fragmentManager.findFragmentById(R.id.bear_frag);
         mTextFragment = (TextFragment) fragmentManager.findFragmentById(R.id.text_frag);
         mPictureFragment = (PictureFragment) fragmentManager.findFragmentById(R.id.pic_frag);
+        dir = new File(getExternalFilesDir("Stories") + File.separator + this.getIntent().getStringExtra("title"));
+
+        mBearFragment.loadVariables(mTextFragment, mPictureFragment, dir);
         mMediaPlayer = new MediaPlayer();
-        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                audioFinished = true;
-            }
-        });
-        audioFinished = false;
 
-        Log.i(TAG, "Directory: " + Environment.getExternalStorageDirectory().toString());
-        Log.i(TAG, "Title: " + getIntent().getStringExtra("title"));
-        //readStory(this.getIntent().getStringExtra("title")); // this activity should be called with intent that has extra "title" with name of story
+        Log.i(TAG, "finished oncreate");
+        max = dir.listFiles().length - 1;
+        i = 0;
+        //readStory();
+
+        mBearFragment.readStory();
     }
 
-    public void readStory(String title) {
-
-        Log.i(TAG, "Entered readStory(" + title + ")");
-
-        if (mPictureFragment == null)
-            mPictureFragment = new PictureFragment();
-        if (mTextFragment == null)
-            mTextFragment = new TextFragment();
-        if (mBearFragment == null)
-            mBearFragment = new BearFragment();
-
-        File dir = new File(Environment.getExternalStorageDirectory() + File.separator + title);
-
-        for (int i = 0; (i < dir.listFiles().length) && dir.listFiles()[i].isDirectory(); i++) {
-            // mBearFragment.animateBear()
-            mPictureFragment.updateImage(dir, i);
-            mTextFragment.updateStory(dir, i);
-            try {
-                mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "audio.mp3");
-                mMediaPlayer.prepare();
-                mMediaPlayer.start();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void readStory() {
+        mTextFragment.updateStory(dir, i);
+        mPictureFragment.updateImage(dir, i);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mMediaPlayer.reset();
+                    isPrepared = false;
+                    Log.i(TAG, "started playing page " + i);
+                    mMediaPlayer.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
+                    mMediaPlayer.prepare();
+                    Log.i(TAG, "prepared page " + i);
+                    mMediaPlayer.start();
+                    MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                    mmr.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
+                    String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                    int millSecond = Integer.parseInt(durationStr);
+                    Handler handl = new Handler();
+                    handl.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.i(TAG, "finished playing page " + i);
+                            if (i++ < max)
+                                readStory();
+                        }
+                    }, millSecond + 100);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            while (!audioFinished) {
-                //animate bear method
-                // wait for audio to finish before proceeding
-            }
-            audioFinished = false;
-        }
+        }, 1000);
     }
-
 }

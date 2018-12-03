@@ -33,9 +33,13 @@ public class PictureFragment extends Fragment {
     }
 
     void updateImage(File dir, int i) {
-        Bitmap bitmap = BitmapFactory.decodeFile(dir + File.separator + i + File.separator + "image.jpg");
+
+        Log.i(TAG, "Entered updateImage(" + dir + ", " + i + ")");
+        mImageView = getView().findViewById(R.id.picture_view);
+        Bitmap bitmap = BitmapFactory.decodeFile(dir + File.separator + i + File.separator + "image.png");
 
         mImageView.setImageBitmap(bitmap);
+        Log.i(TAG, "Updated image " + i );
     }
 
 
