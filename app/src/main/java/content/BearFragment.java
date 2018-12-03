@@ -89,7 +89,11 @@ public class BearFragment extends Fragment{
                     gifDrawable.stop();
                     stopStory = true;
                     tracker = false;
-                    currPage.setText(String.valueOf(i + 1));
+                    if (i != max)
+                        currPage.setText(String.valueOf(i + 1));
+                    else
+                        currPage.setText(String.valueOf(i));
+
                 }
             }
         });
