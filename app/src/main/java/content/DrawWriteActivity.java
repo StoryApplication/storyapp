@@ -38,7 +38,7 @@ public class DrawWriteActivity extends Activity {
     Button orange;
     Button brown;
     ImageButton erase;
-    Button prevButton, nextButton, previewButton, clear, finishButton;
+    Button prevButton, nextButton, clear, finishButton;
     int currentPageNumber = 0;
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
@@ -191,18 +191,31 @@ public class DrawWriteActivity extends Activity {
             }
         });
 
-//        prevButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG,"Entered prevButton OnClickListener");
-//                if (currentPageNumber > 0) {
-//                    updatePage(-1);
-//                }
-//                else {
-//                    // ___
-//                }
-//            }
-//        });
+        prevButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // page = new Pages<>(findViewById(R.id.page_text).)
+                EditText text = (EditText)findViewById(R.id.page_text);
+                String storyText =  text.getText().toString();
+                //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
+                FrameLayout canvas = findViewById(R.id.frame_param);
+                canvas.setDrawingCacheEnabled(true);
+                canvas.buildDrawingCache();
+                Bitmap drawing = canvas.getDrawingCache();
+
+                page = new Pages<>(storyText, drawing);
+                newStory.addPage(page);
+
+                if (currentPageNumber > 0) {
+                    currentPageNumber--;
+                    text.setText(newStory.getPages().get(currentPageNumber).getLeft());
+                    draw.setBitmap(newStory.getPages().get(currentPageNumber).getRight());
+                }
+                else {
+                    // _____
+                }
+            }
+        });
 //
 //        nextButton.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -238,18 +251,6 @@ public class DrawWriteActivity extends Activity {
 
 
 
-    }
-
-
-    public void updatePage(int change) {
-        /*
-        List<__> ____ =  ____;
-
-        currentPageNumber += change;
-
-
-        draw.clear();
-         */
     }
 
 }
