@@ -156,7 +156,7 @@ public class DrawWriteActivity extends Activity {
             }
         });
 
-        prevButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // page = new Pages<>(findViewById(R.id.page_text).)
