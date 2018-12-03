@@ -15,10 +15,12 @@ import android.util.Log;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class DrawWriteActivity extends Activity {
@@ -38,7 +40,7 @@ public class DrawWriteActivity extends Activity {
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
     Story newStory = new Story();
-    Pages<String, Integer> page;
+    Pages<String, Bitmap> page ;
 
 
 
@@ -151,6 +153,23 @@ public class DrawWriteActivity extends Activity {
                         });
                 // Create the AlertDialog object and return it
                  builder.create().show();
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // page = new Pages<>(findViewById(R.id.page_text).)
+                EditText text = (EditText)findViewById(R.id.page_text);
+                String storyText =  text.getText().toString();
+                //Bitmap drawing = Bitmap.createBitmap(findViewById(R.id.draw_frame))//(Bitmap) findViewById(R.id.draw_frame);
+                FrameLayout canvas = findViewById(R.id.frame_param);
+                canvas.setDrawingCacheEnabled(true);
+                canvas.buildDrawingCache();
+                Bitmap drawing = canvas.getDrawingCache();
+
+                page = new Pages<>(storyText, drawing);
+                newStory.addPage(page);
             }
         });
 
