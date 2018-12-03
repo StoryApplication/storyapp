@@ -31,6 +31,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        root = getExternalFilesDir("Stories");
 
         TextView textViewTitle = (TextView) findViewById(R.id.title);
         Button textViewButton1 = (Button) findViewById(R.id.button1);
