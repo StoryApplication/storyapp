@@ -38,7 +38,7 @@ public class BearFragment extends Fragment{
 
     private static final String TAG = "436Project";
     private MediaPlayer mMediaPlayer;
-    private TextFragment mTextFragment;
+    private FragmentText mTextFragment;
     private PictureFragment mPictureFragment;
     private TextView currPage, maxPage;
     File dir;
@@ -179,7 +179,7 @@ public class BearFragment extends Fragment{
         }, 1000);
     }
 
-    public void loadVariables(TextFragment t, PictureFragment p, File d) {
+    public void loadVariables(FragmentText t, PictureFragment p, File d) {
         mTextFragment = t;
         mPictureFragment = p;
         dir = d;

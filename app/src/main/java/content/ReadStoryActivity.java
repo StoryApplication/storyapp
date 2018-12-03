@@ -1,6 +1,7 @@
 package content;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -16,7 +17,7 @@ public class ReadStoryActivity extends Activity {
     private static final String TAG = "436Project";
 
     private BearFragment mBearFragment;
-    private TextFragment mTextFragment;
+    private FragmentText mTextFragment;
     private PictureFragment mPictureFragment;
     private MediaPlayer mMediaPlayer;
     int i, max;
@@ -33,7 +34,7 @@ public class ReadStoryActivity extends Activity {
         FragmentManager fragmentManager = getFragmentManager();
 
         mBearFragment = (BearFragment) fragmentManager.findFragmentById(R.id.bear_frag);
-        mTextFragment = (TextFragment) fragmentManager.findFragmentById(R.id.text_frag);
+        mTextFragment = (FragmentText) fragmentManager.findFragmentById(R.id.frag_text);
         mPictureFragment = (PictureFragment) fragmentManager.findFragmentById(R.id.pic_frag);
         dir = new File(getExternalFilesDir("Stories") + File.separator + this.getIntent().getStringExtra("title"));
 

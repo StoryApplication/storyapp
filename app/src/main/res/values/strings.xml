@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Beary Good Stories</string>
+    <string name="page0">Ollie is an eel. He likes his home in a jar.</string>
+    <string name="page1">When he comes out he swims over his jar.</string>
+    <string name="page2">He swims under his jar.</string>
+    <string name="page3">He swims through his jar.</string>
+    <string name="page4">He swims around his jar.</string>
+    <string name="page5">When he is done, he swims back into his jar.</string>
+    <string name="page6">Now there are two eels, Ollie and Izzy. When Ollie and Izzy come out they can swim over, under, through, around, and back into their jar together.</string>
 </resources>
