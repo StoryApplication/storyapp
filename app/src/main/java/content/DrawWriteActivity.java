@@ -37,6 +37,7 @@ public class DrawWriteActivity extends Activity {
     int currentPageNumber;
     @SuppressLint("WrongViewCast")
     DrawCanvas draw;
+    Story newStory = new Story();
     Pages<String, Integer> page;
 
 
