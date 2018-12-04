@@ -13,16 +13,17 @@
         android:roundIcon="@mipmap/bear"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DrawWriteActivity"></activity>
-        <activity android:name=".ChooseStoryActivity"></activity>
-        <activity android:name=".ReadStoryActivity"></activity>
+        <activity android:name=".DrawWriteActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".ChooseStoryActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".ReadStoryActivity" android:screenOrientation="landscape"></activity>
+
     </application>
 
 </manifest>
