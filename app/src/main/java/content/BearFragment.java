@@ -44,6 +44,7 @@ public class BearFragment extends Fragment{
     File dir;
     int i, max;
     boolean stopStory, tracker;
+    Handler handler, handl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +70,7 @@ public class BearFragment extends Fragment{
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopBtn.performClick();
                 if (!gifDrawable.isPlaying()) {
                     gifDrawable.start();
                     stopStory = false;
@@ -83,12 +85,14 @@ public class BearFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 if (gifDrawable.isPlaying()) {
-                    if (!tracker && i > 0) i--;
+                    //if (!tracker && i > 0) i--;
                     Log.i(TAG, "stop page " + i + ", " + tracker);
                     mMediaPlayer.pause();
                     gifDrawable.stop();
                     stopStory = true;
                     tracker = false;
+                    handler.removeCallbacksAndMessages(null);
+                    handl.removeCallbacksAndMessages(null);
                     currPage.setText(String.valueOf(i + 1));
 
                 }
@@ -141,7 +145,7 @@ public class BearFragment extends Fragment{
         mTextFragment.updateStory(dir, i);
         mPictureFragment.updateImage(dir, i);
         currPage.setText(String.valueOf(i + 1));
-        final Handler handler = new Handler();
+        handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -160,7 +164,7 @@ public class BearFragment extends Fragment{
                     mmr.setDataSource(dir + File.separator + i + File.separator + "sound.wav");
                     String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
                     int millSecond = Integer.parseInt(durationStr);
-                    Handler handl = new Handler();
+                    handl = new Handler();
                     handl.postDelayed(new Runnable() {
                         @Override
                         public void run() {
